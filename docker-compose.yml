@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  app:
+    container_name: docker-express-gateway
+    build: .
+    ports:
+      - '8080:${HTTP_PORT:-8080}'
+      - '9876:${ADMIN_PORT:-9876}'
+    environment:
+      - HTTP_PORT
+      - ADMIN_PORT
+      - REDIS_PORT
+  redis:
+    image: redis:alpine
+    container_name: eg-redis
+    ports:
+      - '6379:${REDIS_PORT:-6379}'

@@ -1,0 +1,32 @@
+# Core
+db:
+  redis:
+    host: redis
+    post: ${REDIS_PORT:-6379}
+    namespace: EG
+
+crypto:
+  cipherKey: sensitiveKey
+  algorithm: aes256
+  saltRounds: 10
+
+# OAuth2 Settings
+session:
+  secret: keyboard cat
+  resave: false
+  saveUninitialized: false
+accessTokens:
+  timeToExpiry: 7200000
+refreshTokens:
+  timeToExpiry: 7200000
+authorizationCodes:
+  timeToExpiry: 300000
+
+plugins:
+  rewrite:
+    package: './plugins/rewrite/manifest.js' # package path is relative to server.js
+  example:
+    # package: express-gateway-plugin-example
+    param1: 'global per plugin param1'
+    baseUrl: 'http://example.com'
+    maxRequestsPerSecond: 234

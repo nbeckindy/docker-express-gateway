@@ -1,0 +1,13 @@
+{
+  "name": "node_docker",
+  "version": "1.0.0",
+  "description": "NodeJS in Docker",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Nathan Beck",
+  "license": "ISC",
+  "private": true
+}
