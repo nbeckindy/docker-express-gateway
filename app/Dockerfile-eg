@@ -1,0 +1,4 @@
+FROM express-gateway
+
+# Example plugin
+RUN yarn global add express-gateway-plugin-example

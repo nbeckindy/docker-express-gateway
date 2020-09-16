@@ -9,5 +9,9 @@
   },
   "author": "Nathan Beck",
   "license": "ISC",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "express-gateway": "~1.16.10",
+    "express-gateway-plugin-example": "~1.0.1"
+  }
 }

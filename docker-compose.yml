@@ -3,7 +3,19 @@ version: '3.8'
 services:
   app:
     container_name: docker-express-gateway
-    build: ./app
+    # Build setup for installing with node image
+    # server.js and package*.json files are required
+    build:
+      context: ./app
+    # Dockerfile-eg is for official express-gateway image
+    # server.js and package*.json files are not needed
+    #   dockerfile: Dockerfile-eg
+    # If using official express-gateway image, config files must be mounted
+    volumes:
+      # Mount express-gateway config files
+      - ./app/config:/var/lib/eg
+      # Mount plugins file; target path must match plugin paths in system.config.yml
+      - ./app/plugins:/var/lib/eg/plugins
     ports:
       - '8080:${HTTP_PORT:-8080}'
       - '9876:${ADMIN_PORT:-9876}'
