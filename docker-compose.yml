@@ -3,13 +3,13 @@ version: '3.8'
 services:
   app:
     container_name: docker-express-gateway
-    # Build setup for installing with node image
+    # Build setup for installing with node image:
     # server.js and package*.json files are required
     build:
       context: ./app
-    # Dockerfile-eg is for official express-gateway image
+    # Dockerfile-eg is for official express-gateway image:
     # server.js and package*.json files are not needed
-    #   dockerfile: Dockerfile-eg
+      dockerfile: Dockerfile-eg
     # If using official express-gateway image, config files must be mounted
     volumes:
       # Mount express-gateway config files

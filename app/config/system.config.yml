@@ -24,8 +24,8 @@ authorizationCodes:
 
 plugins:
   rewrite:
-    # package: '/var/lib/eg/plugins/rewrite/manifest.js' # if using official express-gateway image
-    package: './plugins/rewrite/manifest.js' # if using node image to download express-gateway, relative to server.js
+    package: '/var/lib/eg/plugins/rewrite/manifest.js' # if using official express-gateway image
+    # package: './plugins/rewrite/manifest.js' # if using node image to download express-gateway, relative to server.js
   example:
     # package: express-gateway-plugin-example
     param1: 'global per plugin param1'

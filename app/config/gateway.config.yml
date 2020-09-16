@@ -3,16 +3,22 @@ http:
 admin:
   port: ${ADMIN_PORT:-9876}
   # Setting host to 0.0.0.0 is required to make the admin port available on localhost from outside the container on Mac OSX
-  host: '0.0.0.0' # default value is 'localhost'
+  # But if the admin API is behind a gateway, the default setting works on OSX
+  # host: '0.0.0.0' # default value is 'localhost'
 apiEndpoints:
   api:
     host: localhost
     paths:
       - '/ip'
       - '/headers'
+  admin-api:
+    host: localhost
+    paths: '/admin*'
 serviceEndpoints:
   httpbin:
     url: 'https://httpbin.org'
+  admin:
+    url: 'http://localhost:9876'
 policies:
   - basic-auth
   - cors
@@ -25,7 +31,7 @@ policies:
   - example
   - rewrite
 pipelines:
-  - name: getting-started
+  getting-started:
     apiEndpoints:
       - api
     policies:
@@ -41,4 +47,14 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: httpbin
+              changeOrigin: true
+  admin:
+    apiEndpoints:
+      - admin-api
+    policies:
+      # - key-auth:
+      - proxy:
+          - action:
+              serviceEndpoint: admin
+              stripPath: true
               changeOrigin: true
