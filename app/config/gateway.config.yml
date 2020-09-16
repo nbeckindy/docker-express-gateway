@@ -3,8 +3,8 @@ http:
 admin:
   port: ${ADMIN_PORT:-9876}
   # Setting host to 0.0.0.0 is required to make the admin port available on localhost from outside the container on Mac OSX
-  # But if the admin API is behind a gateway, the default setting works on OSX
-  # host: '0.0.0.0' # default value is 'localhost'
+  # If the admin API is behind a gateway, the default setting mostly works on OSX, except for the CLI
+  host: '0.0.0.0' # default value is 'localhost'
 apiEndpoints:
   api:
     host: localhost
