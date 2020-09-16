@@ -1,18 +1,28 @@
-version: '3'
+version: '3.8'
 
 services:
   app:
     container_name: docker-express-gateway
-    build: .
+    build: ./app
     ports:
       - '8080:${HTTP_PORT:-8080}'
       - '9876:${ADMIN_PORT:-9876}'
+    # Set in .env file
     environment:
       - HTTP_PORT
       - ADMIN_PORT
       - REDIS_PORT
+    depends_on:
+      - redis
   redis:
     image: redis:alpine
     container_name: eg-redis
+    # Command to use AOF persistence
+    command: redis-server --appendonly yes
+    volumes:
+      # Mount persistent datastore
+      - ./redis-data:/data
+      # Mount redis config file
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
     ports:
       - '6379:${REDIS_PORT:-6379}'
